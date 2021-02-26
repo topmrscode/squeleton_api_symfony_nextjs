@@ -1,0 +1,33 @@
+register:
+  path: /register
+  controller: App\Controller\AuthController::register
+  methods: ["POST"]
+
+# use /api to see if user is well connected mentionning bearer token in headers
+api:
+  path: /api
+  controller: App\Controller\AuthController::api
+  methods: ["GET"]
+
+# Login check to log the user and generate JWT token
+# use /login to obtain your token
+
+api_login_check:
+  path: /login
+  controller: App\Controller\AuthController::api
+  methods: ["POST"]
+
+api_get_me:
+  path: /api/me
+  controller: App\Controller\AuthController::me
+  methods: ["GET"]
+
+create_product:
+  path: /admin/products
+  controller: App\Controller\ProductController::create
+  methods: ["POST"]
+
+list_products:
+  path: /products
+  controller: App\Controller\ProductController::list
+  methods: ["GET"]
