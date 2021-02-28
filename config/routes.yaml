@@ -31,3 +31,8 @@ list_products:
   path: /products
   controller: App\Controller\ProductController::list
   methods: ["GET"]
+
+modify_products_in_cart:
+  path: /carts/products
+  controller: App\Controller\CartController::modifyProducts
+  methods: ["POST"]

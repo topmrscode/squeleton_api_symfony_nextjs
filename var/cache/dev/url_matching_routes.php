@@ -14,6 +14,7 @@ return [
         '/api/me' => [[['_route' => 'api_get_me', '_controller' => 'App\\Controller\\AuthController::me'], null, ['GET' => 0], null, false, false, null]],
         '/admin/products' => [[['_route' => 'create_product', '_controller' => 'App\\Controller\\ProductController::create'], null, ['POST' => 0], null, false, false, null]],
         '/products' => [[['_route' => 'list_products', '_controller' => 'App\\Controller\\ProductController::list'], null, ['GET' => 0], null, false, false, null]],
+        '/carts/products' => [[['_route' => 'modify_products_in_cart', '_controller' => 'App\\Controller\\CartController::modifyProducts'], null, ['POST' => 0], null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

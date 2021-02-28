@@ -9,4 +9,5 @@ return [
     'api_login_check' => [[], ['_controller' => 'App\\Controller\\AuthController::api'], [], [['text', '/login']], [], []],
     'api_get_me' => [[], ['_controller' => 'App\\Controller\\AuthController::me'], [], [['text', '/api/me']], [], []],
     'create_product' => [[], ['_controller' => 'App\\Controller\\ProductController::create'], [], [['text', '/admin/products']], [], []],
+    'list_products' => [[], ['_controller' => 'App\\Controller\\ProductController::list'], [], [['text', '/products']], [], []],
 ];

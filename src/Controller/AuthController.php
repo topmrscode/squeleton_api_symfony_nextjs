@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\UserRepository;
+use App\Repository\CartRepository;
+
 use Symfony\Component\HttpFoundation\Request;
+use Psr\Log\LoggerInterface;
 
 class AuthController extends ApiController
 {
@@ -16,9 +19,11 @@ class AuthController extends ApiController
      *
      * @param UsersRepository $usersRepository
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, LoggerInterface $logger, CartRepository $cartRepository)
     {
         $this->userRepository = $userRepository;
+        $this->cartRepository = $cartRepository;
+        $this->logger = $logger;
     }
 
     /**
@@ -43,7 +48,6 @@ class AuthController extends ApiController
         $password = $contentDecoded['password'];
         $passwordConfirmation = $contentDecoded['passwordConfirmation'];
 
-
         // validate the fields
         if (!array_key_exists('email', $contentDecoded) || !$email || preg_match($REGEX_EMAIL,  $email) != 1) {
             return $this->respondValidationError($ERROR_EMAIL);
@@ -64,7 +68,11 @@ class AuthController extends ApiController
         }
         // create user
         $NewUser = $this->userRepository->createNewUser($newUserData);
-        return $this->respondCreated(['_id' => $NewUser->getId(), 'email' => $NewUser->getEmail(), 'roles' => $NewUser->getRoles()]);
+        // create a cart associated to this user
+        $newCart = $this->cartRepository->createNewCart($NewUser);
+        $this->userRepository->setUserCart($NewUser, $newCart);
+        $resp = $NewUser->serialize();
+        return $this->respondCreated($resp);
     }
 
     /**

@@ -66,15 +66,10 @@ class ProductController extends ApiController
         foreach ($products as $p) {
             array_push($resp, $p->serialize());
         }
-        // $this->logger->info(json_encode($resp));
         return $this->respond($resp);
     }
 
-    public function addProductToCart(Request $request)
-    {
-        $price = $request->get('title');
-        $description = $request->get('description');
-        $price = $request->get('price');
-        $imageUrl =  $request->files->get('imageUrl');
-    }
+
+   
 }
+
