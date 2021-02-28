@@ -19,32 +19,38 @@ class CartRepository extends ServiceEntityRepository
         parent::__construct($registry, Cart::class);
     }
 
-    // /**
-    //  * @return Cart[] Returns an array of Cart objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    // create new cart
+    public function createNewCart($user)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $cart = new Cart();
+        $cart->setUser($user);
+        $cart->setUpdatedAt(new \DateTime());
 
-    /*
-    public function findOneBySomeField($value): ?Cart
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+
+        $this->_em->persist($cart);
+        $this->_em->flush(); 
+
+        return $cart;
     }
-    */
+
+    public function modifyProducts($cart, $id, $quantity)
+    {
+        $products = $cart->getProducts();
+        // check to remove all products id corresponding to id
+        $newProducts = [];
+        foreach($products as $product) {
+            if ($product != $id) {
+                array_push($newProducts, $product);
+            }
+        }
+        for ($i = 1; $i <= $quantity; $i++) {
+            array_push($newProducts, $id);
+        };
+        sort($newProducts);
+        $cart->setProducts($newProducts);
+
+        $this->_em->flush();
+        
+    }
+
 }

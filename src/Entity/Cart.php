@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\CartRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,7 +18,7 @@ class Cart
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="carts")
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="cart", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -28,28 +26,12 @@ class Cart
     /**
      * @ORM\Column(type="array")
      */
-    private $products;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isActive;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
+    private $products = [];
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
-
-    public function __construct()
-    {
-        $this->isActive = true;
-        $this->products = array();
-    }
 
     public function getId(): ?int
     {
@@ -61,47 +43,21 @@ class Cart
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-
-    public function getProducts()
+    public function getProducts(): ?array
     {
         return $this->products;
     }
 
-    public function addProduct(String $product): self
+    public function setProducts(array $products): self
     {
-        array_push($this->products, $product);
-
-        return $this;
-    }
-
-
-    public function getIsActive(): ?bool
-    {
-        return $this->isActive;
-    }
-
-    public function setIsActive(bool $isActive): self
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
+        $this->products = $products;
 
         return $this;
     }
@@ -109,6 +65,7 @@ class Cart
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
+
     }
 
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
@@ -116,5 +73,10 @@ class Cart
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+    public function serialize()
+    {
+        $item = ['id' => $this->id, 'products' => $this->products];
+        return $item;
     }
 }

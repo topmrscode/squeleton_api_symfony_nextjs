@@ -16,6 +16,8 @@ return array(
     'App\\Kernel' => $baseDir . '/src/Kernel.php',
     'App\\Repository\\ProductRepository' => $baseDir . '/src/Repository/ProductRepository.php',
     'App\\Repository\\UserRepository' => $baseDir . '/src/Repository/UserRepository.php',
+    'App\\Security\\AccessDeniedHandler' => $baseDir . '/src/Security/AccessDeniedHandler.php',
+    'App\\Service\\ImageUploader' => $baseDir . '/src/Service/ImageUploader.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Cloudinary\\Api\\Admin\\AdminApi' => $vendorDir . '/cloudinary/cloudinary_php/src/Api/Admin/AdminApi.php',
     'Cloudinary\\Api\\Admin\\ApiEndPoint' => $vendorDir . '/cloudinary/cloudinary_php/src/Api/Admin/ApiEndPoint.php',

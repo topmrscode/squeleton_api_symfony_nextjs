@@ -115,10 +115,10 @@ final class Versions
   'symfony/var-exporter' => 'v5.2.3@5aed4875ab514c8cb9b6ff4772baa25fa4c10307',
   'symfony/yaml' => 'v5.2.3@338cddc6d74929f6adf19ca5682ac4b8e109cdb0',
   'teapot/status-code' => 'v1.1.2@7aaba4364645ebb9d3a36267c9b3a32206d3042b',
-  'symfony/polyfill-ctype' => '*@553cc9140b93a99ec50ce1c9e2615aacefc3ace6',
-  'symfony/polyfill-iconv' => '*@553cc9140b93a99ec50ce1c9e2615aacefc3ace6',
-  'symfony/polyfill-php72' => '*@553cc9140b93a99ec50ce1c9e2615aacefc3ace6',
-  '__root__' => 'dev-master@553cc9140b93a99ec50ce1c9e2615aacefc3ace6',
+  'symfony/polyfill-ctype' => '*@d1fb2a6b54c968e089063f09ed61ebf800c425aa',
+  'symfony/polyfill-iconv' => '*@d1fb2a6b54c968e089063f09ed61ebf800c425aa',
+  'symfony/polyfill-php72' => '*@d1fb2a6b54c968e089063f09ed61ebf800c425aa',
+  '__root__' => 'dev-main@d1fb2a6b54c968e089063f09ed61ebf800c425aa',
 );
 
     private function __construct()

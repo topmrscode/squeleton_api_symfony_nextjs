@@ -51,12 +51,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user = new User();
         $user->setEmail($data['email'])
             ->setPassword($this->encoder->encodePassword($user, $data['password']));
+        $user->setRoles(['ROLE_USER']);
 
         $this->_em->persist($user);
         $this->_em->flush(); // j'ai fini mes actions
 
         return $user;
     }
+     // set user cart 
+     public function setUserCart(UserInterface $user, $cart)
+     {
+        $user->setCart($cart);
+        $this->_em->flush();
+      }
     // get user by email
     public function getuserByEmail($data): ?User
     {

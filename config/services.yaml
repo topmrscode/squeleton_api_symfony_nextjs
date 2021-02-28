@@ -40,6 +40,10 @@ services:
     class: App\Repository\ProductRepository
     arguments:
 
+  app.cart.repository:
+    class: App\Repository\CartRepository
+    arguments:
+
   # Controllers
   app.auth.controller:
     class: App\Controller\AuthController
@@ -90,5 +94,12 @@ services:
   app.product.controller:
     class: App\Controller\ProductController
     arguments:
+      - "@app.product.repository"
+      - Psr\Log\LoggerInterface
+      
+  app.cart.controller:
+    class: App\Controller\CartController
+    arguments:
+      - "@app.cart.repository"
       - "@app.product.repository"
       - Psr\Log\LoggerInterface
